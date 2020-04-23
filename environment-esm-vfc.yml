@@ -6,7 +6,10 @@ dependencies:
   - basemap
   - cartopy
   - cartopy_offlinedata
+  - dask
+  - dask-labextension
   - datashader
+  - distributed
   - fsspec
   - geopandas
   - geoviews
@@ -17,8 +20,10 @@ dependencies:
   - hvplot
   - intake
   - intake-xarray
+  - jupyter-server-proxy
   - lz4
   - matplotlib-base
+  - nbgitpuller
   - netcdf4
   - nomkl
   - numcodecs
