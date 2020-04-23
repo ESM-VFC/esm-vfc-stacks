@@ -8,5 +8,5 @@ jobs:
     container: docker://continuumio/miniconda3:4.8.2
     steps:
       - uses: actions/checkout@v1
-      - run: conda env create -n esm-vfc -f environment-esm-vfc.yml -q -y -c
+      - run: conda env create -n esm-vfc -f environment-esm-vfc.yml
       - run: conda env list && conda list -n esm-vfc
