@@ -1,0 +1,35 @@
+name: esm-vfc
+channels:
+  - conda-forge
+dependencies:
+  - python=3
+  - basemap
+  - cartopy
+  - cartopy_offlinedata
+  - datashader
+  - fsspec
+  - geopandas
+  - geoviews
+  - gsw
+  - h5netcdf
+  - h5py
+  - holoviews
+  - hvplot
+  - intake
+  - intake-xarray
+  - lz4
+  - matplotlib-base
+  - netcdf4
+  - nomkl
+  - numcodecs
+  - numpy
+  - pandas
+  - panel
+  - pip
+  - python-blosc
+  - scipy
+  - seaborn
+  - xarray
+  - xgcm
+  - xhistogram
+  - zarr
