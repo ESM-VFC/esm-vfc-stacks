@@ -1,0 +1,50 @@
+name: repo2docker build and push
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+
+env:
+  GITHUB_REF: ${{ github.ref }}
+  GITHUB_SHA: ${{ github.sha }}
+  IMAGE_PREFIX: esmvfc/
+
+jobs:
+  latest_image:
+    env:
+      IMAGE: esm-vfc-stacks
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Set Job Environment Variables
+      run: |
+        # Create docker tag. Use git describe if possible.
+        DOCKER_TAG="$( git rev-parse --short ${GITHUB_SHA} )"
+        git describe --tag ${GITHUB_SHA} && DOCKER_TAG=$(git describe --tag ${GITHUB_SHA}) || echo "not using git describe"
+        IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
+        echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
+        echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
+        echo "will build ${IMAGE_SPEC}"
+    - name: Set Up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install repo2docker
+      run: |
+        python --version
+        pip install jupyter-repo2docker docker
+        repo2docker --version
+        docker version
+    - name: Authenticate with DockerHub
+      run: |
+        echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
+    - name: Build and push with repo2docker
+      run: |
+        jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run --push .
