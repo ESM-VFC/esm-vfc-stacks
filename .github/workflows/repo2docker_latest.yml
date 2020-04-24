@@ -31,6 +31,7 @@ jobs:
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
+        echo "will build ${IMAGE_SPEC}"
     - name: Set Up Python 3.7
       uses: actions/setup-python@v1
       with:
