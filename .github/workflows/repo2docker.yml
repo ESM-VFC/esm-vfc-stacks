@@ -48,9 +48,9 @@ jobs:
         with:
           name: ${{env.IMAGE}}-packages
           path: conda-packages.txt
-      - name: Test Image
-        run: |
-          docker run ${IMAGE_SPEC} binder/verify
+      # - name: Test Image
+      #   run: |
+      #     docker run ${IMAGE_SPEC} binder/verify
       - name: Authenticate with DockerHub and push
         if: github.ref == 'refs/heads/master'
         run: |
