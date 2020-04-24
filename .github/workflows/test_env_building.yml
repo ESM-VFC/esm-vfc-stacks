@@ -1,6 +1,6 @@
 name: Test env building
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
