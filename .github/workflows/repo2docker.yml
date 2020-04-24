@@ -1,4 +1,4 @@
-name: repo2docker build and push
+name: repo2docker
 
 on:
   pull_request:
@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - master
-    tags:
-      - '*'
 
 env:
   GITHUB_REF: ${{ github.ref }}
@@ -25,13 +23,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Set Job Environment Variables
       run: |
-        # Create docker tag. Use git describe if possible.
-        DOCKER_TAG="$( git rev-parse --short ${GITHUB_SHA} )"
-        git describe --tag ${GITHUB_SHA} && DOCKER_TAG=$(git describe --tag ${GITHUB_SHA}) || echo "not using git describe"
+        CALVER="$( date -u '+%Y.%m.%d' )"
+        SHA="$( git rev-parse --short ${GITHUB_SHA} )"
+        DOCKER_TAG=${CALVER}-${SHA}
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
-        echo "will build ${IMAGE_SPEC}"
     - name: Set Up Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -42,9 +39,20 @@ jobs:
         pip install jupyter-repo2docker docker
         repo2docker --version
         docker version
-    - name: Authenticate with DockerHub
+    - name: Build with repo2docker
+      run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
+    - name: Save package listing
+       docker run ${ONBUILD_IMAGE_SPEC} conda list > conda-packages.txt
+    - name: Archive package listing
+      uses: actions/upload-artifact@v1
+      with:
+        name: ${{env.IMAGE}}-packages
+        path: conda-packages.txt
+    - name: Test Image
+      run: |
+        docker run ${IMAGE_SPEC} binder/verify
+    - name: Authenticate with DockerHub and push
+      if: github.ref == 'refs/heads/master'
       run: |
         echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
-    - name: Build and push with repo2docker
-      run: |
-        jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run --push .
+        docker push ${IMAGE_SPEC}
