@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Set Job Environment Variables
       run: |
-        DOCKER_TAG="${GITHUB_REF}_${GITHUB_SHA}"
+        DOCKER_TAG="${GITHUB_SHA}"
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
