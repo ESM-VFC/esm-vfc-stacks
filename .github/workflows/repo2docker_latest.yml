@@ -1,9 +1,9 @@
-name: MasterBuild
+name: repo2docker build
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
+#   push:
+#     branches:
+#       - master
 
 env:
   GITHUB_REF: ${{ github.ref }}
