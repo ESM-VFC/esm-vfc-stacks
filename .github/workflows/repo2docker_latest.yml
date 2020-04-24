@@ -27,7 +27,7 @@ jobs:
       run: |
         # Create docker tag. Use git describe if possible.
         DOCKER_TAG="$( git rev-parse --short ${GITHUB_SHA} )"
-        git describe --tag ${GITHUB_SHA} && DOCKER_TAG=$(git describe --tag ${GITHUB_SHA})
+        git describe --tag ${GITHUB_SHA} && DOCKER_TAG=$(git describe --tag ${GITHUB_SHA}) || echo "not using git describe"
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
