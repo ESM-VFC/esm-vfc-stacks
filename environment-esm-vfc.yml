@@ -36,6 +36,7 @@ dependencies:
   - panel
   - pip
   - pyresample
+  - pytest
   - python-blosc
   - scipy
   - seaborn
@@ -47,3 +48,4 @@ dependencies:
   - zarr
   - pip:
     - pangaeapy
+    - git+https://github.com/fesom/pyfesom2.git@2d86b55a82c86a190a6c60a42d38e900658de73c
