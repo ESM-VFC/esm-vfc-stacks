@@ -45,3 +45,5 @@ dependencies:
   - xgcm
   - xhistogram
   - zarr
+  - pip:
+    - pangaeapy
