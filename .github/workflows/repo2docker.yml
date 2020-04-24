@@ -39,20 +39,20 @@ jobs:
           pip install jupyter-repo2docker docker
           repo2docker --version
           docker version
-    - name: Build with repo2docker
-      run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
-    - name: Save package listing
-      run: docker run ${IMAGE_SPEC} conda list > conda-packages.txt
-    - name: Archive package listing
-      uses: actions/upload-artifact@v1
-      with:
-        name: ${{env.IMAGE}}-packages
-        path: conda-packages.txt
-    - name: Test Image
-      run: |
-        docker run ${IMAGE_SPEC} binder/verify
-    - name: Authenticate with DockerHub and push
-      if: github.ref == 'refs/heads/master'
-      run: |
-        echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
-        docker push ${IMAGE_SPEC}
+      - name: Build with repo2docker
+        run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
+      - name: Save package listing
+        run: docker run ${IMAGE_SPEC} conda list > conda-packages.txt
+      - name: Archive package listing
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{env.IMAGE}}-packages
+          path: conda-packages.txt
+      - name: Test Image
+        run: |
+          docker run ${IMAGE_SPEC} binder/verify
+      - name: Authenticate with DockerHub and push
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
+          docker push ${IMAGE_SPEC}
