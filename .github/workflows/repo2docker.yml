@@ -19,30 +19,30 @@ jobs:
       IMAGE: esm-vfc-stacks
     runs-on: ubuntu-18.04
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-    - name: Set Job Environment Variables
-      run: |
-        CALVER="$( date -u '+%Y.%m.%d' )"
-        SHA="$( git rev-parse --short ${GITHUB_SHA} )"
-        DOCKER_TAG=${CALVER}-${SHA}
-        IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
-        echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
-        echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
-    - name: Set Up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Install repo2docker
-      run: |
-        python --version
-        pip install jupyter-repo2docker docker
-        repo2docker --version
-        docker version
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set Job Environment Variables
+        run: |
+          CALVER="$( date -u '+%Y.%m.%d' )"
+          SHA="$( git rev-parse --short ${GITHUB_SHA} )"
+          DOCKER_TAG=${CALVER}-${SHA}
+          IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
+          echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
+          echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
+      - name: Set Up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install repo2docker
+        run: |
+          python --version
+          pip install jupyter-repo2docker docker
+          repo2docker --version
+          docker version
     - name: Build with repo2docker
       run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
     - name: Save package listing
-       docker run ${ONBUILD_IMAGE_SPEC} conda list > conda-packages.txt
+      run: docker run ${IMAGE_SPEC} conda list > conda-packages.txt
     - name: Archive package listing
       uses: actions/upload-artifact@v1
       with:
