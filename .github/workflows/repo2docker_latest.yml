@@ -8,7 +8,7 @@ on: [pull_request, push]
 #       - '*'
 
 env:
-  GITHUB_REF: ${{ github.ref }}
+  GITHUB_REF: ${{ github.ref/refs\/tags\// }}
   GITHUB_SHA: ${{ github.sha }}
   IMAGE_PREFIX: esmvfc/
 
@@ -20,8 +20,6 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Isolate GH ref
-      run: echo "::set-env name=GITHUB_REF::${GITHUB_REF/refs\/tags\//}"
     - name: Show GH ref
       run: |
         echo "ref ${GITHUB_REF}"
