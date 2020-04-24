@@ -6,6 +6,8 @@ dependencies:
   - basemap
   - cartopy
   - cartopy_offlinedata
+  - cmocean
+  - cmaps
   - dask
   - dask-labextension
   - datashader
@@ -20,20 +22,25 @@ dependencies:
   - hvplot
   - intake
   - intake-xarray
+  - joblib
   - jupyter-server-proxy
   - lz4
   - matplotlib-base
   - nbgitpuller
   - netcdf4
   - nomkl
+  - numba
   - numcodecs
   - numpy
   - pandas
   - panel
   - pip
+  - pyresample
   - python-blosc
   - scipy
   - seaborn
+  - seawater
+  - shapely
   - xarray
   - xgcm
   - xhistogram
