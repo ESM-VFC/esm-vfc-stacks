@@ -34,12 +34,9 @@ jobs:
         pip install jupyter-repo2docker docker
         repo2docker --version
         docker version
-    - name: Build with repo2docker
-      run: |
-        jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
     - name: Authenticate with DockerHub
       run: |
         echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
-    - name: Push Image
+    - name: Build and push with repo2docker
       run: |
-        docker push $IMAGE_SPEC
+        jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run --push .
