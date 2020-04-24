@@ -1,14 +1,14 @@
 name: repo2docker build
 
-on: [pull_request, push]
-#   push:
-#     branches:
-#       - master
-#     tags:
-#       - '*'
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
 
 env:
-  GITHUB_REF: ${{ github.ref/refs\/tags\// }}
+  GITHUB_REF: ${{ github.ref }}
   GITHUB_SHA: ${{ github.sha }}
   IMAGE_PREFIX: esmvfc/
 
@@ -20,9 +20,10 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Show GH ref
+    - name: Show GH refs
       run: |
         echo "ref ${GITHUB_REF}"
+        git describe --tag ${GITHUB_SHA}
         echo "ref ${GITHUB_SHA}"
     - name: Set Job Environment Variables
       run: |
