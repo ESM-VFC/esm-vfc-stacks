@@ -1,7 +1,9 @@
 name: env-create-maint
+
 on:
   schedule:
-    - cron:  '0 0,12 * * *'
+    # Runs at 23:59 UTC on Sat
+    - cron: '0 0 * * 7'
 
 jobs:
   build:
