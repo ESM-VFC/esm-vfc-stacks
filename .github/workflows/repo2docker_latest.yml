@@ -1,4 +1,4 @@
-name: repo2docker build
+name: repo2docker build and push
 
 on:
   push:
@@ -20,14 +20,11 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Show GH refs
-      run: |
-        echo "ref ${GITHUB_REF}"
-        git describe --tag ${GITHUB_SHA}
-        echo "ref ${GITHUB_SHA}"
     - name: Set Job Environment Variables
       run: |
-        DOCKER_TAG="${GITHUB_SHA}"
+        # Create docker tag. Use git describe if possible.
+        DOCKER_TAG="$( git rev-parse --short ${GITHUB_SHA} )"
+        git describe --tag ${GITHUB_SHA} && DOCKER_TAG=$(git describe --tag ${GITHUB_SHA})
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
