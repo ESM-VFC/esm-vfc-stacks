@@ -51,8 +51,11 @@ jobs:
       # - name: Test Image
       #   run: |
       #     docker run ${IMAGE_SPEC} binder/verify
+      - name: Also tag image as latest
+        run: docker tag ${IMAGE_SPEC} "${IMAGE_PREFIX}${IMAGE}:latest"
       - name: Authenticate with DockerHub and push
         if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
           docker push ${IMAGE_SPEC}
+          docker push "${IMAGE_PREFIX}${IMAGE}:latest"
