@@ -1,12 +1,9 @@
-name: env-create
+name: env-create-maint
 
 on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
+  schedule:
+    # Runs at 23:59 UTC on Sat
+    - cron: '60 24 * * 7'
 
 jobs:
   build:
