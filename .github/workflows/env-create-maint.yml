@@ -1,0 +1,21 @@
+name: env-create-maint
+
+on:
+  schedule:
+    # Runs at 23:59 UTC on Sat
+    - cron: '0 0 * * 6'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    container: docker://continuumio/miniconda3:4.8.2
+    steps:
+      - uses: actions/checkout@v1
+      - run: conda env create -n esm-vfc -f environment-esm-vfc.yml
+      - run: conda env list
+      - run: conda list -n esm-vfc > conda-packages.txt
+      - name: Archive Conda Package List
+        uses: actions/upload-artifact@v1
+        with:
+          name: conda-packages
+          path: conda-packages.txt
