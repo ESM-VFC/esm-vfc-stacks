@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Set Job Environment Variables
       run: |
-        DOCKER_TAG="latest"
+        DOCKER_TAG="${GITHUB_REF}_${GITHUB_SHA}"
         IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
         echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
         echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
@@ -37,3 +37,9 @@ jobs:
     - name: Build with repo2docker
       run: |
         jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
+    - name: Authenticate with DockerHub
+      run: |
+        echo ${{ secrets.docker_access_token }} | docker login -u ${{ secrets.docker_user_name }} --password-stdin
+    - name: Push Image
+      run: |
+        docker push $IMAGE_SPEC
