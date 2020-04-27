@@ -49,3 +49,4 @@ dependencies:
   - zarr
   - pip:
     - pangaeapy
+    - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git
