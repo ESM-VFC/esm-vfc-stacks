@@ -40,7 +40,7 @@ jobs:
           repo2docker --version
           docker version
       - name: Build with repo2docker
-        run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-name jovyan --no-run .
+        run: jupyter-repo2docker --image-name ${IMAGE_SPEC} --user-id 1000 --user-name jovyan --no-run .
       - name: Save package listing
         run: docker run ${IMAGE_SPEC} conda list > conda-packages.txt
       - name: Archive package listing
