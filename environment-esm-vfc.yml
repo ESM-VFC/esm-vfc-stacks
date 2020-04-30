@@ -48,5 +48,6 @@ dependencies:
   - xhistogram
   - zarr
   - pip:
-    - pangaeapy
     - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git
+    - git+https://github.com/ESM-VFC/intake_pangaeapy.git@v0.1.1
+    - pangaeapy
