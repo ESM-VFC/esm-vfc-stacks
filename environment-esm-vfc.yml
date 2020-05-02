@@ -2,7 +2,7 @@ name: esm-vfc
 channels:
   - conda-forge
 dependencies:
-  - python=3
+  - python=3.7
   - basemap
   - cartopy
   - cartopy_offlinedata
