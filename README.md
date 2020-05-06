@@ -8,22 +8,38 @@ Central compute environment definition(s) for ESM VFC.
 
 ## How to use?
 
+### Just use the environment file
+
 You can just use the [env file](environment-esm-vfc.yml) to install everything with Conda.
 
-You can use [docker images](https://hub.docker.com/r/esmvfc/esm-vfc-stacks) that come with a fully working (repo2docker-built) Jupyter environment and run them with docker:
+Note, however, that this env file does not specify any of the Jupyter and Dask configs that we also set in this repo.
+
+### Use the pre-built Docker images with _Docker_
+
+You can use [docker images](https://hub.docker.com/r/esmvfc/esm-vfc-stacks) that come with a fully working (repo2docker-built) Jupyter environment and run them with docker.
+
+Assuming you want to expose your work directory to `/work` in the container, and run:
 ```shell
-docker run -p 8888:8888 esmvfc/esm-vfc-stacks:<tag>
+docker run \
+    -v ${HOME}/work/:/work -w /work \
+    -p 8888:8888 esmvfc/esm-vfc-stacks:<tag> \
+    jupyter lab --no-browser --ip="127.0.0.1" --port="8888"
 ```
-or with Singularity
+
+### Use the pre-built Docker images with _Singularity_
+
+To run from your `work/` dir with Singularity:
 ```shell
+cd ${HOME}/work/
 singularity run \
     -B $(mktemp -d):/run/user \
-    docker://esmvfc/esm-vfc-stacks:<tag>
+    docker://esmvfc/esm-vfc-stacks:<tag> \
+    jupyer lab --no-browser --ip="0.0.0.0"
 ```
 
 ## How to contribute?
 
-Modify the [env file](environment-esm-vfc.yml) with a pull request.
+Modify the [env file](environment-esm-vfc.yml) or any of the [Binder config](.binder/) or [Dask config](.dask/) with a pull request.
 
 ## Releases
 
