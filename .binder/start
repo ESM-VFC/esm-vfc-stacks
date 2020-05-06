@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # set env var for Dask dashboard rewriting to jupyter-server-proxy
 #
