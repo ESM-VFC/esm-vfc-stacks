@@ -7,4 +7,4 @@
 #
 export JS_PROXY_URL_BASE=${JUPYTERHUB_SERVICE_PREFIX}
 
-#EOF
+exec "$@"
