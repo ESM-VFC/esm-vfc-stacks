@@ -4,11 +4,4 @@
 jupyter labextension install @pyviz/jupyterlab_pyviz
 jupyter labextension install @jupyterlab/server-proxy
 
-# set env var for Dask dashboard rewriting to jupyter-server-proxy
-#
-# The proxy serves at /proxy/<port> on a local JupyterLab and to
-# {JUPYTERHUB_SERVICE_PREFIX}/proxy/<port> if in a JupyterHub.
-#
-export PROXY_URL_BASE=${JUPYTERHUB_SERVICE_PREFIX}
-
 #EOF
