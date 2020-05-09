@@ -47,6 +47,7 @@ dependencies:
   - xarray
   - xgcm
   - xhistogram
+  - xpublish
   - zarr
   - pip:
     - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git
