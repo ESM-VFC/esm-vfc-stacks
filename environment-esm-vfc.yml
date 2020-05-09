@@ -9,6 +9,7 @@ dependencies:
   - cmocean
   - cmaps
   - dask
+  - dask-jobqueue
   - dask-labextension
   - datashader
   - distributed
