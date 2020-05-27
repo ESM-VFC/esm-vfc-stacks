@@ -20,11 +20,15 @@ You can use [docker images](https://hub.docker.com/r/esmvfc/esm-vfc-stacks) that
 
 Assuming you want to expose your work directory to `/work` in the container, and run:
 ```shell
+docker pull esmvfc/esm-vfc-stacks:latest
 docker run \
     -v ${HOME}/work/:/work -w /work \
-    -p 8888:8888 esmvfc/esm-vfc-stacks:<tag> \
-    jupyter lab --no-browser --ip="127.0.0.1" --port="8888"
+    -p 8888:8888 esmvfc/esm-vfc-stacks:latest \
+    jupyter lab --no-browser --ip="0.0.0.0" --port="8888"
 ```
+If you want to run a specific version of this image, replace the tag `latest` accordingly.
+All available versions [are found on Dockerhub](https://hub.docker.com/r/esmvfc/esm-vfc-stacks/tags).
+
 
 ### Use the pre-built Docker images with _Singularity_
 
@@ -36,6 +40,10 @@ singularity run \
     docker://esmvfc/esm-vfc-stacks:<tag> \
     jupyer lab --no-browser --ip="0.0.0.0"
 ```
+
+If you want to run a specific version of this image, replace the tag `latest` accordingly.
+All available versions [are found on Dockerhub](https://hub.docker.com/r/esmvfc/esm-vfc-stacks/tags).
+
 
 ## How to contribute?
 
