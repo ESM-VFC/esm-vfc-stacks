@@ -36,6 +36,7 @@ dependencies:
   - numpy
   - pandas
   - panel
+  - papermill
   - pip
   - pyfesom2
   - pyresample
