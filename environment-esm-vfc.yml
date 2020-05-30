@@ -27,6 +27,7 @@ dependencies:
   - jupytext
   - lz4
   - matplotlib-base
+  - nbval
   - nbgitpuller
   - netcdf4
   - nomkl
