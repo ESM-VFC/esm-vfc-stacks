@@ -13,7 +13,6 @@ dependencies:
   - dask-labextension
   - datashader
   - distributed
-  - fsspec
   - geopandas
   - geoviews
   - gsw
@@ -51,6 +50,7 @@ dependencies:
   - xpublish
   - zarr
   - pip:
+    - git+https://github.com/intake/filesystem_spec.git@644cc3ac8171c68aab1835483443dfa90d5d7988
     - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git@v2020.05.04.1
     - git+https://github.com/ESM-VFC/intake_pangaeapy.git@v0.1.1
     - git+https://git.geomar.de/python/xorca_lonlat2ij.git@v1.0.0
