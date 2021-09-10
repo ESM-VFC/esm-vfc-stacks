@@ -6,8 +6,8 @@ dependencies:
   - basemap
   - cartopy
   - cartopy_offlinedata
-  - cmocean
   - cmaps
+  - cmocean
   - dask
   - dask-jobqueue
   - dask-labextension
@@ -27,8 +27,8 @@ dependencies:
   - jupytext
   - lz4
   - matplotlib-base
-  - nbval
   - nbgitpuller
+  - nbval
   - netcdf4
   - nomkl
   - numba
@@ -42,6 +42,7 @@ dependencies:
   - pyresample
   - pytest
   - python-blosc
+  - pyviz_comms
   - scipy
   - seaborn
   - seawater
@@ -52,8 +53,8 @@ dependencies:
   - xpublish
   - zarr
   - pip:
-    - git+https://github.com/intake/filesystem_spec.git@644cc3ac8171c68aab1835483443dfa90d5d7988
-    - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git@v2020.05.30.1
-    - git+https://github.com/ESM-VFC/intake_pangaeapy.git@v0.1.1
-    - git+https://git.geomar.de/python/xorca_lonlat2ij.git@v1.0.0
-    - pangaeapy
+      - git+https://github.com/intake/filesystem_spec.git@644cc3ac8171c68aab1835483443dfa90d5d7988
+      - git+https://github.com/ESM-VFC/esm-vfc-catalogs.git@v2020.05.30.1
+      - git+https://github.com/ESM-VFC/intake_pangaeapy.git@v0.1.1
+      - git+https://git.geomar.de/python/xorca_lonlat2ij.git@v1.0.0
+      - pangaeapy
