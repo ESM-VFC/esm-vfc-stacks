@@ -27,8 +27,8 @@ jobs:
           SHA="$( git rev-parse --short ${GITHUB_SHA} )"
           DOCKER_TAG=${CALVER}-${SHA}
           IMAGE_SPEC="${IMAGE_PREFIX}${IMAGE}:${DOCKER_TAG}"
-          echo "::set-env name=DOCKER_TAG::${DOCKER_TAG}"
-          echo "::set-env name=IMAGE_SPEC::${IMAGE_SPEC}"
+          echo "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_ENV
+          echo "IMAGE_SPEC=${IMAGE_SPEC}" >> $GITHUB_ENV
       - name: Set Up Python 3.7
         uses: actions/setup-python@v1
         with:
